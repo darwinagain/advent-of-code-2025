@@ -4257,7 +4257,7 @@ func spinDialPartOne(current int, value string) int {
 		newValue = current + stepsInt
 	}
 
-	newValue = newValue % MAX
+	newValue = wrapValue(newValue)
 
 	// fmt.Printf("%d -> %s -> %d\n", current, value, newValue)
 
@@ -4272,19 +4272,14 @@ func spinDialPartTwo(current int, value string) int {
 	}
 	switch value[0] {
 	case 'L':
+		partTwoZeroCount += ((current + stepsInt) / 100)
 		newValue = current - stepsInt
 	case 'R':
+		partTwoZeroCount += ((current + stepsInt) / 100)
 		newValue = current + stepsInt
 	}
 
-	if newValue > 99 {
-		partTwoZeroCount += newValue / MAX
-	}
-	if newValue < 1 {
-		partTwoZeroCount += (current / MAX) - (newValue / MAX)
-	}
-
-	newValue = newValue % MAX
+	newValue = wrapValue(newValue)
 
 	return newValue
 }
