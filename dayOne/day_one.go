@@ -4272,10 +4272,10 @@ func spinDialPartTwo(current int, value string) int {
 	}
 	switch value[0] {
 	case 'L':
-		partTwoZeroCount += ((current + stepsInt) / 100)
+		partTwoZeroCount += ((current + stepsInt) / MAX)
 		newValue = current - stepsInt
 	case 'R':
-		partTwoZeroCount += ((current + stepsInt) / 100)
+		partTwoZeroCount += ((current + stepsInt) / MAX)
 		newValue = current + stepsInt
 	}
 
