@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 )
 
@@ -43,11 +44,12 @@ func wrapValue(value int) int {
 }
 
 func spinDialPartOne(current int, value string) int {
-	var newValue int
 	stepsInt, err := strconv.Atoi(value[1:])
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	var newValue int
 	switch value[0] {
 	case 'L':
 		newValue = current - stepsInt
@@ -55,29 +57,24 @@ func spinDialPartOne(current int, value string) int {
 		newValue = current + stepsInt
 	}
 
-	newValue = wrapValue(newValue)
-
-	// fmt.Printf("%d -> %s -> %d\n", current, value, newValue)
-
-	return newValue
+	return wrapValue(newValue)
 }
 
 func spinDialPartTwo(current int, value string) int {
-	var newValue int
 	stepsInt, err := strconv.Atoi(value[1:])
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	var newValue int
 	switch value[0] {
 	case 'L':
-		partTwoZeroCount += ((current + stepsInt) / MAX)
 		newValue = current - stepsInt
+		partTwoZeroCount += int(math.Floor(float64(current-1)/float64(MAX))) - int(math.Floor(float64(newValue-1)/float64(MAX)))
 	case 'R':
-		partTwoZeroCount += ((current + stepsInt) / MAX)
 		newValue = current + stepsInt
+		partTwoZeroCount += int(math.Floor(float64(newValue)/float64(MAX))) - int(math.Floor(float64(current)/float64(MAX)))
 	}
 
-	newValue = wrapValue(newValue)
-
-	return newValue
+	return wrapValue(newValue)
 }
